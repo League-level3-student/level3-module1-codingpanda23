@@ -32,15 +32,23 @@ public class _03_MurderOfCrows {
          * then print the name of the guilty Crow.
          */
     			for (int i = 0; i < theMurder.size(); i++) {
-    				//if () {
-				
-				//}
+    				Crow c = theMurder.get(i);
+    				ArrayList<String> contents = c.getStomachContents();
+				if (contents.contains("diamond")) {
+					System.out.println(c.getName());
+					if (i == 0) {
+						System.out.println(i+1 + " crow died.");
+					} else {
+						System.out.println(i+1 + " crows died.");
+					}
+				}	
 			}
+	
         
         /* 2. How many innocent crows had to die before the diamond was found? */
-    	
+    		
     }
-
+    
     private void initializeCrows() {
         theMurder.add(new Crow("Rok"));
         theMurder.add(new Crow("Merle"));
@@ -63,9 +71,9 @@ class Crow {
     public Crow(String name) {
         this.name = name;
         fillCrowsStomach();
-    }
+	}
 
-    private void fillCrowsStomach() {
+	private void fillCrowsStomach() {
         for (int i = 0; i < 10; i++)
             this.stomachContents.add(getRandomCrowFood());
     }
