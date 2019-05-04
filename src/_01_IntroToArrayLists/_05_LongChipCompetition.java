@@ -21,7 +21,10 @@ public class _05_LongChipCompetition {
 		for (int i = 0; i < theBeatles.size(); i++) {
 			Beatle bug = theBeatles.get(i);
 			ArrayList<Chip> fries = bug.getChips();
-			
+			for (int j = 0; j < fries.size(); j++) {
+				fries.get(j).getLength();
+				
+			}
 		}
 	}
 	
