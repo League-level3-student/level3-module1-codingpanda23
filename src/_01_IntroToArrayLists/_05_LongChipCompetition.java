@@ -23,8 +23,6 @@ public class _05_LongChipCompetition {
 			ArrayList<Chip> fries = bug.getChips();
 			for (int j = 0; j < fries.size(); j++) {
 				fries.get(j).getLength();
-				System.out.println(fries);
-				
 			}
 		}
 	}
