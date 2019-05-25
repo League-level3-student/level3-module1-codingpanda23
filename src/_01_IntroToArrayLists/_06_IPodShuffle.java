@@ -16,10 +16,12 @@ public class _06_IPodShuffle implements ActionListener{
 	JFrame frame = new JFrame();
 	JPanel panel = new JPanel();
 	JButton button = new JButton();
+	ArrayList<Song> songs = new ArrayList<Song>();
 	
 	public _06_IPodShuffle() {
 		// 1. Use the Song class the play the demo.mp3 file.
 				//new Song("demo.mp3").play();
+				
 				
 		/**
 		 * 2. Congratulations on completing the sound check! * Now we want to make an
@@ -28,8 +30,6 @@ public class _06_IPodShuffle implements ActionListener{
 		 * you're really cool, you can stop all the songs, before playing a new one on
 		 * subsequent button clicks.
 		 */
-				
-				
 				button.setText("Surprise Me!");
 				frame.add(panel);
 				panel.add(button);
@@ -37,9 +37,6 @@ public class _06_IPodShuffle implements ActionListener{
 				frame.pack();
 				panel.setVisible(true);
 				button.addActionListener(this);
-				
-				ArrayList<Song> songs = new ArrayList<Song>();
-				
 				
 	}
 	
@@ -51,7 +48,7 @@ public class _06_IPodShuffle implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource() == button) {
-			
+			new Song("Ghost Duet - Louie Zong.mp3").play();
 		}
 	}
 }
