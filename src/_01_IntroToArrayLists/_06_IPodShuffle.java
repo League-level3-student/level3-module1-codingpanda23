@@ -37,7 +37,6 @@ public class _06_IPodShuffle implements ActionListener{
 				frame.pack();
 				panel.setVisible(true);
 				button.addActionListener(this);
-				
 	}
 	
 	public static void main(String[] args) {
@@ -47,8 +46,15 @@ public class _06_IPodShuffle implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if (e.getSource() == button) {
+		int rand = new Random().nextInt(3);
+		if (rand == 0) {
 			new Song("Ghost Duet - Louie Zong.mp3").play();
+		}
+		if (rand == 1) {
+			new Song("barn owl sound - call.mp3").play();
+		}
+		if (rand == 2) {
+			new Song("demo.mp3").play();
 		}
 	}
 }
