@@ -11,12 +11,14 @@ import javax.swing.JPanel;
 
 public class HangMan implements KeyListener{
 	static Stack<String> s = new Stack<String>();
+	static Stack<Character> user = new Stack<Character>();
 	static JFrame frame = new JFrame();
 	static JPanel panel = new JPanel();
 	static JLabel label = new JLabel();
 	static String underscore = new String();
 	static int lives = 10;
 	static String word;
+	static char c;
 	
 	public static void main(String[] args) {
 		HangMan h = new HangMan();
@@ -44,11 +46,6 @@ public class HangMan implements KeyListener{
 			}
 			label.setText(underscore + "\n Lives: " + lives);
 		}
-		
-		
-		
-		
-		
 	}
 		
 		
@@ -62,7 +59,9 @@ public class HangMan implements KeyListener{
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		//System.out.println(e.getKeyChar());
-		
+		c = e.getKeyChar();
+		user.push(c);
+
 		if (word.contains(e.getKeyChar()+"")) {
 			int w = word.indexOf(e.getKeyChar());
 			String newunderscore = "";
@@ -80,9 +79,16 @@ public class HangMan implements KeyListener{
 		}
 		label.setText(underscore + "\n Lives: " + lives);
 		
-		if (!underscore.contains("_") && lives != 0) {
+		String input = "";
+		for (int i = 0; i < user.size(); i++) {
+			input += String.valueOf(user.pop());
+		}
+		System.out.println(input);
+		
+		if (!underscore.contains("_") && lives > 0) {
 			JOptionPane.showMessageDialog(null, "You've guessed the word!");
 			label.setText(underscore + "\n Lives: " + lives);
+			
 		}
 		else if (lives == 0) {
 			JOptionPane.showMessageDialog(null, "Game Over");
