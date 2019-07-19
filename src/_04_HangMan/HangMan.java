@@ -18,6 +18,7 @@ public class HangMan implements KeyListener{
 	static String underscore = new String();
 	static int lives = 10;
 	static String word;
+	static int words;
 	static char c;
 	
 	public static void main(String[] args) {
@@ -33,7 +34,7 @@ public class HangMan implements KeyListener{
 		frame.setVisible(true);
 		frame.addKeyListener(this);
 			
-		int words = Integer.parseInt(JOptionPane.showInputDialog("How many words do you want to spell?"));
+		words = Integer.parseInt(JOptionPane.showInputDialog("How many words do you want to spell?"));
 		for (int i = 0; i < words; i++) {
 			s.push(Utilities.readRandomLineFromFile("dictionary.txt"));
 		}
@@ -88,7 +89,6 @@ public class HangMan implements KeyListener{
 		if (!underscore.contains("_") && lives > 0) {
 			JOptionPane.showMessageDialog(null, "You've guessed the word!");
 			label.setText(underscore + "\n Lives: " + lives);
-			
 		}
 		else if (lives == 0) {
 			JOptionPane.showMessageDialog(null, "Game Over");
