@@ -10,46 +10,48 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class HangMan implements KeyListener{
-	static Stack<String> s = new Stack<String>();
-	static Stack<Character> user = new Stack<Character>();
-	static JFrame frame = new JFrame();
-	static JPanel panel = new JPanel();
-	static JLabel label = new JLabel();
-	static String underscore = new String();
-	static int lives = 10;
-	static String word;
-	static int words;
-	static char c;
-	
+	Stack<String> s = new Stack<String>();
+	Stack<Character> user = new Stack<Character>();
+	JFrame frame = new JFrame();
+	JPanel panel = new JPanel();
+	JLabel label = new JLabel();
+	String underscore = new String();
+	int lives = 10;
+	String word;
+	String dictionary;
+	int words;
+	char c;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	public static void main(String[] args) {
 		HangMan h = new HangMan();
 		h.run();
-		
 	}
-	
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	void run() {
 		frame.add(panel);
 		panel.add(label);
 		frame.pack();
 		frame.setVisible(true);
 		frame.addKeyListener(this);
-			
+		
 		words = Integer.parseInt(JOptionPane.showInputDialog("How many words do you want to spell?"));
 		for (int i = 0; i < words; i++) {
 			s.push(Utilities.readRandomLineFromFile("dictionary.txt"));
 		}
-		
-		for (int i = 0; i < words; i++) {
-			word = s.pop();
-			System.out.println(word);
-			for (int j = 0; j < word.length(); j++) {
-				underscore+="_";
-			}
-			label.setText(underscore + "\n Lives: " + lives);
+		word = s.pop();
+		System.out.println(word);
+		for (int j = 0; j < word.length(); j++) {
+			underscore+="_";
 		}
+		label.setText(underscore + " Lives: " + lives);
 	}
-		
-		
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
@@ -86,15 +88,25 @@ public class HangMan implements KeyListener{
 		}
 		System.out.println(input);
 		
-		if (!underscore.contains("_") && lives > 0) {
-			JOptionPane.showMessageDialog(null, "You've guessed the word!");
+		if (!underscore.contains("_") && lives > 0 && words > 1) {
+			JOptionPane.showMessageDialog(null, "YoU'vE gUesSeD tHe wOrD!");
 			label.setText(underscore + "\n Lives: " + lives);
+			if (words > 1) {
+				dictionary = s.pop();
+				System.out.println(dictionary);
+				for (int i = 0; i < dictionary.length(); i++) {
+					underscore+="_";
+					label.setText(underscore + " Lives: " + lives);
+				}
+			}
+		}
+		if (!underscore.contains("_") && lives > 0 && words == 1) {
+			JOptionPane.showConfirmDialog(null, "YoU'vE gUesSeD tHe wOrD! Do YoU wAnT tO pLaY aGaIn?");
 		}
 		else if (lives == 0) {
-			JOptionPane.showMessageDialog(null, "Game Over");
+			JOptionPane.showConfirmDialog(null, "gAmE OveR! dO yOu WaNt To tRy AgAiN?");
 			s.pop();
 		}
-		
 	}
 
 	@Override

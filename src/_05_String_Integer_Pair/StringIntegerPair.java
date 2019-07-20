@@ -48,7 +48,7 @@ public class StringIntegerPair {
 	//5. Complete the method so it returns the value located at the passed in key.
 	//   If the key does not exist, return Integer.MIN_VALUE.
 	public int get(String key) {
-		return ;
+		return 0;
 		
 	}
 	
