@@ -21,9 +21,10 @@ public class StringIntegerPair {
 		//   the passed in String, set the value at that location to the
 		//   passed in value and return from the method.
 			for (int i = 0; i < keys.length; i++) {
-				//if () {
-					
-				//}
+				if (keys[i] == key) {
+					i = value;
+					return;
+				}
 			}
 		//B. create a String array that is one element longer than the keys
 			String[] s = new String[keys.length + 1];
@@ -67,11 +68,13 @@ public class StringIntegerPair {
 	
 	//8. Complete the getKeysMethod so it returns the keys as an array
 	public String[] getKeys() {
+		
 		return null;
 	}
 	
 	//9. Complete the getValues so it returns the values as an array
 	public int[] getValues() {
+		
 		return null;
 	}
 }

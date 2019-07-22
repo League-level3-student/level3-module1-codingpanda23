@@ -16,12 +16,12 @@ public class HangMan implements KeyListener{
 	JPanel panel = new JPanel();
 	JLabel label = new JLabel();
 	String underscore = new String();
+	String line = new String();
 	int lives = 10;
 	String word;
 	String dictionary;
 	int words;
 	char c;
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public static void main(String[] args) {
@@ -43,6 +43,7 @@ public class HangMan implements KeyListener{
 			s.push(Utilities.readRandomLineFromFile("dictionary.txt"));
 		}
 		word = s.pop();
+		
 		System.out.println(word);
 		for (int j = 0; j < word.length(); j++) {
 			underscore+="_";
@@ -66,7 +67,7 @@ public class HangMan implements KeyListener{
 		user.push(c);
 
 		if (word.contains(e.getKeyChar()+"")) {
-			int w = word.indexOf(e.getKeyChar());
+			word.indexOf(e.getKeyChar());
 			String newunderscore = "";
 			for (int i = 0; i < word.length(); i++) {
 				if (word.charAt(i) == e.getKeyChar()) {
@@ -87,19 +88,41 @@ public class HangMan implements KeyListener{
 			input += String.valueOf(user.pop());
 		}
 		System.out.println(input);
-		
 		if (!underscore.contains("_") && lives > 0 && words > 1) {
 			JOptionPane.showMessageDialog(null, "YoU'vE gUesSeD tHe wOrD!");
 			label.setText(underscore + "\n Lives: " + lives);
 			if (words > 1) {
-				dictionary = s.pop();
+				lives = 10;
 				System.out.println(dictionary);
 				for (int i = 0; i < dictionary.length(); i++) {
-					underscore+="_";
-					label.setText(underscore + " Lives: " + lives);
+					line+="_";
+					label.setText("");
+					label.setText(line + " Lives: " + lives);
+				}
+				if (dictionary.contains(e.getKeyChar()+"")) {
+					dictionary.indexOf(e.getKeyChar());
+					String newunderscore = "";
+					for (int i = 0; i < dictionary.length(); i++) {
+						if (dictionary.charAt(i) == e.getKeyChar()) {
+							newunderscore+=e.getKeyChar();
+						}else {
+							newunderscore+=line.charAt(i);
+						}
+					}
+					line = newunderscore;
+					label.setText(line);
+				}else {
+					lives--;
+				}
+				label.setText(line + "\n Lives: " + lives);
+				if (!line.contains("_") && lives > 0) {
+					lives = 10;
+					JOptionPane.showMessageDialog(null, "YoU'vE gUesSeD tHe wOrD!");
 				}
 			}
+			
 		}
+		
 		if (!underscore.contains("_") && lives > 0 && words == 1) {
 			JOptionPane.showConfirmDialog(null, "YoU'vE gUesSeD tHe wOrD! Do YoU wAnT tO pLaY aGaIn?");
 		}
