@@ -32,9 +32,9 @@ public class HangMan implements KeyListener{
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	void run() {
-		frame.add(panel);
-		panel.add(label);
-		frame.pack();
+		frame.add(label);
+		//panel.add(label);
+		//frame.pack();
 		frame.setVisible(true);
 		frame.addKeyListener(this);
 		
@@ -42,6 +42,7 @@ public class HangMan implements KeyListener{
 		for (int i = 0; i < words; i++) {
 			s.push(Utilities.readRandomLineFromFile("dictionary.txt"));
 		}
+		System.out.println(s);
 		word = s.pop();
 		
 		System.out.println(word);
@@ -49,6 +50,7 @@ public class HangMan implements KeyListener{
 			underscore+="_";
 		}
 		label.setText(underscore + " Lives: " + lives);
+		frame.pack();
 	}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -82,28 +84,34 @@ public class HangMan implements KeyListener{
 			lives--;
 		}
 		label.setText(underscore + "\n Lives: " + lives);
-		
 		String input = "";
 		for (int i = 0; i < user.size(); i++) {
 			input += String.valueOf(user.pop());
 		}
 		System.out.println(input);
-		if (!underscore.contains("_") && lives > 0 && words > 1) {
+		/**/if (input == word && lives > 0 && words > 1) {
 			JOptionPane.showMessageDialog(null, "YoU'vE gUesSeD tHe wOrD!");
 			label.setText(underscore + "\n Lives: " + lives);
 			if (words > 1) {
+				System.out.println(s);
+				if (!s.isEmpty()) {
+					word = s.pop();
+				}
+				else {
+					word = word;
+				}
 				lives = 10;
-				System.out.println(dictionary);
-				for (int i = 0; i < dictionary.length(); i++) {
+				System.out.println(word);
+				for (int i = 0; i < word.length(); i++) {
 					line+="_";
 					label.setText("");
 					label.setText(line + " Lives: " + lives);
 				}
-				if (dictionary.contains(e.getKeyChar()+"")) {
-					dictionary.indexOf(e.getKeyChar());
+				if (word.contains(e.getKeyChar()+"")) {
+					word.indexOf(e.getKeyChar());
 					String newunderscore = "";
-					for (int i = 0; i < dictionary.length(); i++) {
-						if (dictionary.charAt(i) == e.getKeyChar()) {
+					for (int i = 0; i < word.length(); i++) {
+						if (word.charAt(i) == e.getKeyChar()) {
 							newunderscore+=e.getKeyChar();
 						}else {
 							newunderscore+=line.charAt(i);
@@ -115,16 +123,13 @@ public class HangMan implements KeyListener{
 					lives--;
 				}
 				label.setText(line + "\n Lives: " + lives);
-				if (!line.contains("_") && lives > 0) {
-					lives = 10;
-					JOptionPane.showMessageDialog(null, "YoU'vE gUesSeD tHe wOrD!");
-				}
 			}
 			
 		}
 		
 		if (!underscore.contains("_") && lives > 0 && words == 1) {
-			JOptionPane.showConfirmDialog(null, "YoU'vE gUesSeD tHe wOrD! Do YoU wAnT tO pLaY aGaIn?");
+			int end = JOptionPane.showConfirmDialog(null, "YoU'vE gUesSeD tHe wOrD! Do YoU wAnT tO pLaY aGaIn?");
+			//0=yes  1=no  2=cancel
 		}
 		else if (lives == 0) {
 			JOptionPane.showConfirmDialog(null, "gAmE OveR! dO yOu WaNt To tRy AgAiN?");
