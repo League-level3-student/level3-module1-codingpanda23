@@ -22,6 +22,7 @@ public class HangMan implements KeyListener{
 	String dictionary;
 	int words;
 	char c;
+	String wordCheck;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public static void main(String[] args) {
@@ -45,7 +46,7 @@ public class HangMan implements KeyListener{
 		System.out.println(s);
 		word = s.pop();
 		
-		System.out.println(word);
+		//System.out.println(word);
 		for (int j = 0; j < word.length(); j++) {
 			underscore+="_";
 		}
@@ -67,6 +68,7 @@ public class HangMan implements KeyListener{
 		//System.out.println(e.getKeyChar());
 		c = e.getKeyChar();
 		user.push(c);
+		System.out.println(user);
 
 		if (word.contains(e.getKeyChar()+"")) {
 			word.indexOf(e.getKeyChar());
@@ -77,11 +79,13 @@ public class HangMan implements KeyListener{
 				}else {
 					newunderscore+=underscore.charAt(i);
 				}
+				frame.pack();
 			}
 			underscore = newunderscore;
 			label.setText(underscore);
 		}else {
 			lives--;
+			frame.pack();
 		}
 		label.setText(underscore + "\n Lives: " + lives);
 		String input = "";
@@ -89,15 +93,14 @@ public class HangMan implements KeyListener{
 			input += String.valueOf(user.pop());
 		}
 		System.out.println(input);
-		/**/if (input == word && lives > 0 && words > 1) {
+		if (input == word && lives > 0 && words > 1) {
 			JOptionPane.showMessageDialog(null, "YoU'vE gUesSeD tHe wOrD!");
 			label.setText(underscore + "\n Lives: " + lives);
 			if (words > 1) {
 				System.out.println(s);
 				if (!s.isEmpty()) {
 					word = s.pop();
-				}
-				else {
+				}else {
 					word = word;
 				}
 				lives = 10;
@@ -130,6 +133,13 @@ public class HangMan implements KeyListener{
 		if (!underscore.contains("_") && lives > 0 && words == 1) {
 			int end = JOptionPane.showConfirmDialog(null, "YoU'vE gUesSeD tHe wOrD! Do YoU wAnT tO pLaY aGaIn?");
 			//0=yes  1=no  2=cancel
+			if (end == 0) {
+				
+			}else if (end == 1) {
+				
+			}else if (end == 2){
+				
+			}
 		}
 		else if (lives == 0) {
 			JOptionPane.showConfirmDialog(null, "gAmE OveR! dO yOu WaNt To tRy AgAiN?");

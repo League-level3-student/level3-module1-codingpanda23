@@ -50,31 +50,39 @@ public class StringIntegerPair {
 	//   If the key does not exist, return Integer.MIN_VALUE.
 	public int get(String key) {
 		return 0;
-		
 	}
 	
 	//6. Complete the containsKey method so that it returns true if the
 	//   passed in keys is contained in the keys array
 	public boolean containsKey(String key) {
-		
+		for (int i = 0; i < keys.length; i++) {
+			if (keys[i] == key) {
+				return true;
+			}
+		}
 		return false;
+		
 	}
 	//7. Complete the containsValue method so that it returns true if the
 	//   passed in value is contained in the values array
 	public boolean containsValue(int value) {
-		
+		for (int i = 0; i < values.length; i++) {
+			if (values[i] == value) {
+				return true;
+			}
+		}
 		return false;
 	}
 	
-	//8. Complete the getKeysMethod so it returns the keys as an array
+	//8. Complete the getKeys method so it returns the keys as an array
 	public String[] getKeys() {
 		
-		return null;
+		return keys;
 	}
 	
-	//9. Complete the getValues so it returns the values as an array
+	//9. Complete the getValues method so it returns the values as an array
 	public int[] getValues() {
 		
-		return null;
+		return values;
 	}
 }
