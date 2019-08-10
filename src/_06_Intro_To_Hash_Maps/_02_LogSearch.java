@@ -1,7 +1,7 @@
 package _06_Intro_To_Hash_Maps;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashMap;
 
 import javax.swing.JButton;
@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class _02_LogSearch implements MouseListener{
+public class _02_LogSearch implements ActionListener{
   /* 
 	 * Crate a HashMap of Integers for the keys and Strings for the values.
 	 * Create a GUI with three buttons. 
@@ -38,69 +38,85 @@ public class _02_LogSearch implements MouseListener{
 	 *
 	 * */
 	
-	HashMap<Integer, String> hash = new HashMap<Integer, String>();
-	
 	JFrame frame = new JFrame();
 	JPanel panel = new JPanel();
 	JButton addEntry = new JButton();
 	JButton searchID = new JButton();
 	JButton viewList = new JButton();
-	JButton remove = new JButton();
+	//JButton remove = new JButton();
 	
-	public void GUI(){
+	HashMap<Integer, String> hash = new HashMap<Integer, String>();
+	
+	public void createGUI(){
 		frame.add(panel);
+		frame.setVisible(true);
 		panel.add(addEntry);
 		panel.add(searchID);
-		//panel.add(viewList);
+		panel.add(viewList);
 		//panel.add(remove);
 		
 		addEntry.setText("Add Entry");
 		searchID.setText("Search by ID");
-		//viewList.setText("View List");
+		viewList.setText("View List");
 		//remove.setText("Remove Entry");
+		
+		addEntry.addActionListener(this);
+		searchID.addActionListener(this);
+		viewList.addActionListener(this);
+		//remove.addActionListener(this);
+		
+		frame.pack();
 	}
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public static void main(String[] args) {
+		_02_LogSearch logsearch = new _02_LogSearch();
+		logsearch.createGUI();
+	}
 	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	@Override
-	public void mouseClicked(MouseEvent e) {
+	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		//Button 1:
 		if (e.getSource() == addEntry) {
-			String s = JOptionPane.showInputDialog("Please enter an ID number.");
+			String s = JOptionPane.showInputDialog("Please enter an ID number to log.");
 			int ID = Integer.parseInt(s);
-			
-			String name = JOptionPane.showInputDialog("Please enter a name.");
-			
+					
+			String name = JOptionPane.showInputDialog("Please enter a name to associate to the ID.");
+					
 			hash.put(ID, name);
 		}
 		//Button 2:
 		if (e.getSource() == searchID) {
-			
+			String sea = JOptionPane.showInputDialog("Please enter an ID number to search for.");
+			int search = Integer.parseInt(sea);
+			if (hash.containsKey(search)) {
+				JOptionPane.showMessageDialog(null, "The name " + hash.get(search) + " goes with ID #" + search);
+			}else {
+				JOptionPane.showMessageDialog(null, "This entry does not exist.");
+			}
 		}
+		//Button 3:
+		if (e.getSource() == viewList) {
+			String people = "";
+			for (int i = 0; i < hash.size(); i++) {
+				people += "ID: " + hash.get(hash.keySet()) + "    Name: " + hash.get(hash.values());
+			}
+			JOptionPane.showMessageDialog(null, people);
+		}
+		//Button 4:
+		/*if (e.getSource() == remove) {
+			String r = JOptionPane.showInputDialog("Enter an ID you want to remove.");
+			int rem = Integer.parseInt(r);
+			if (hash.containsKey(rem)) {
+				hash.remove(rem);
+				JOptionPane.showMessageDialog(null, "The ID number " + r + " has been removed");
+			}else {
+				JOptionPane.showMessageDialog(null, "This ID doesn't exist.");
+			}
+			
+		}*/
 	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }
