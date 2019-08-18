@@ -43,7 +43,7 @@ public class _02_LogSearch implements ActionListener{
 	JButton addEntry = new JButton();
 	JButton searchID = new JButton();
 	JButton viewList = new JButton();
-	//JButton remove = new JButton();
+	JButton remove = new JButton();
 	
 	HashMap<Integer, String> hash = new HashMap<Integer, String>();
 	
@@ -53,17 +53,17 @@ public class _02_LogSearch implements ActionListener{
 		panel.add(addEntry);
 		panel.add(searchID);
 		panel.add(viewList);
-		//panel.add(remove);
+		panel.add(remove);
 		
 		addEntry.setText("Add Entry");
 		searchID.setText("Search by ID");
 		viewList.setText("View List");
-		//remove.setText("Remove Entry");
+		remove.setText("Remove Entry");
 		
 		addEntry.addActionListener(this);
 		searchID.addActionListener(this);
 		viewList.addActionListener(this);
-		//remove.addActionListener(this);
+		remove.addActionListener(this);
 		
 		frame.pack();
 	}
@@ -99,14 +99,18 @@ public class _02_LogSearch implements ActionListener{
 		}
 		//Button 3:
 		if (e.getSource() == viewList) {
+			//for (Integer people : hash.keySet()) {
+				//JOptionPane.showMessageDialog(null, "ID: " + people + "  Name: " + hash.get(people));
+			//}
 			String people = "";
-			for (int i = 0; i < hash.size(); i++) {
-				people += "ID: " + hash.get(hash.keySet()) + "    Name: " + hash.get(hash.values());
+			for (int i : hash.keySet()) {
+				people += "ID: " + (i) + "  Name: " + hash.get(i) + "\n";
+
 			}
 			JOptionPane.showMessageDialog(null, people);
 		}
 		//Button 4:
-		/*if (e.getSource() == remove) {
+		if (e.getSource() == remove) {
 			String r = JOptionPane.showInputDialog("Enter an ID you want to remove.");
 			int rem = Integer.parseInt(r);
 			if (hash.containsKey(rem)) {
@@ -116,7 +120,7 @@ public class _02_LogSearch implements ActionListener{
 				JOptionPane.showMessageDialog(null, "This ID doesn't exist.");
 			}
 			
-		}*/
+		}
 	}
 	
 }
